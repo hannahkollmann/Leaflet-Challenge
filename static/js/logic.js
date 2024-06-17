@@ -1,7 +1,7 @@
 //Store the URL for the GeoJSON data
 const url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_week.geojson';
 
-// create Leaflet tile layer
+// Create Tile Layer
 let streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
@@ -9,30 +9,30 @@ let streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
 // Create Leaflet map object.
 var myMap = L.map("map", {
     center: [37.00, -95.00],
-    zoom: 5,
+    zoom: 6,
     layers: [streets]
 });
 
 
-//define basemaps as the streetmap
+// Define basemaps as the streetmap
 let baseMaps = {
     "streets": streets
 };
 
-//define the earthquake layergroup and tectonic plate layergroups for the map
+// Define the earthquake layergroup and tectonic plate layergroups for the map
 let earthquake_data = new L.LayerGroup();
 let tectonics = new L.LayerGroup();
 
-//define the overlays and link the layergroups to separate overlays
+// Define the overlays and link the layergroups to separate overlays
 let overlays = {
     "Earthquakes": earthquake_data,
     "Tectonic Plates": tectonics
 };
 
-//add a control layer and pass in baseMaps and overlays
+// Add a control layer and pass in baseMaps and overlays
 L.control.layers(baseMaps, overlays).addTo(myMap);
 
-//function for the style of the points
+// Function for the style of the points
 function styleInfo(feature) {
     return {
         color: chooseColor(feature.geometry.coordinates[2]), // set outside color by depth
@@ -58,8 +58,7 @@ function chooseRadius(magnitude) {
 };
 
 
-//defining popup when markers are clicked
-// Popups yield Earthquake ID, Magnitude, Location, and depth of each earthquake taken from json data
+// Defining popup when markers are clicked
 d3.json(url).then(function (data) { //pull the earthquake JSON data with d3
     L.geoJson(data, {
         pointToLayer: function (feature, latlon) {  //declare a point to layer function that takes a feature and latlon
@@ -70,10 +69,7 @@ d3.json(url).then(function (data) { //pull the earthquake JSON data with d3
     earthquake_data.addTo(myMap);
 
 
-    //pull and trace the tectonic plates
-    //add tectonic data to the tectonic layer
-    // attribution to : https://github.com/fraxen/tectonicplates for the tectonic plate info
-    // pull data using d3
+    // Add tectonic data to the tectonic layer
     d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function (data) { 
         L.geoJson(data, {
             color: "black", 
@@ -84,8 +80,8 @@ d3.json(url).then(function (data) { //pull the earthquake JSON data with d3
 
 
 });
-//create legend - credit to codepen, attribution below
-// Attribution to https://codepen.io/haakseth/pen/KQbjdO -- this structure is referenced in style.css
+
+// Create Legend 
 var legend = L.control({ position: "bottomright" });
 legend.onAdd = function(myMap) {
     var div = L.DomUtil.create("div", "legend");
