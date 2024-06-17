@@ -45,5 +45,5 @@ Perform the following tasks:
 
 References: For this challenge, I used the 'Past 7 Days' M1.0+ Earthquakes Data (Link: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_week.geojson) 
 
-
+Repo is deployed using Github page: https://hannahkollmann.github.io/Leaflet-Challenge/
 
