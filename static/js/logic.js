@@ -6,7 +6,7 @@ let streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
-// Create Leaflet map object.
+// Create Leaflet map object
 var myMap = L.map("map", {
     center: [37.00, -95.00],
     zoom: 6,
@@ -14,7 +14,7 @@ var myMap = L.map("map", {
 });
 
 
-// Define basemaps as the streetmap
+// Define Basemaps as the Streetmap
 let baseMaps = {
     "streets": streets
 };
@@ -41,8 +41,8 @@ function styleInfo(feature) {
     }
 };
 
-
-// Define a function to create circle markers with size and color based on earthquake properties.
+// Reference: Had assistance from current classmates to finalize code
+// Define a function to create circle markers with size and color based on earthquake properties
 function chooseColor(depth) {
     if (depth <= 10) return "green";
     else if (depth > 10 & depth <= 30) return "blue";
